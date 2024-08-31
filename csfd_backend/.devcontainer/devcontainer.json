@@ -1,0 +1,37 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+	"name": "CSFD Backend API",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+	"forwardPorts": [
+		3000,
+		5432
+	],
+	"portsAttributes": {
+		"3000": {
+			"label": "CSFD Backend API",
+			"onAutoForward": "notify"
+		},
+		"5432": {
+			"label": "Postgresql port",
+			"onAutoForward": "silent"
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-azuretools.vscode-docker",
+				"dbaeumer.vscode-eslint",
+				"ms-vscode.vscode-typescript-next",
+				"yoavbls.pretty-ts-errors",
+				"ms-ossdata.vscode-postgresql",
+				"Prisma.prisma"
+			]
+		}
+	},
+	"postCreateCommand": "npm i",
+	"remoteUser": "node"
+}

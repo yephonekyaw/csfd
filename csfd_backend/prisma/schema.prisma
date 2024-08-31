@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model chances {
+  id          Int       @id(map: "chances_pk")
+  junior_id   Int?
+  lives       Int?
+  status      Boolean?
+  reveal_date DateTime? @db.Timestamp(6)
+  created_at  DateTime  @default(now()) @db.Timestamp(6)
+  updated_at  DateTime  @default(now()) @db.Timestamp(6)
+  students    students? @relation(fields: [junior_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "junior___fk")
+}
+
+model hints {
+  id                                 Int       @id(map: "id")
+  senior_id                          Int?
+  junior_id                          Int?
+  description                        String?   @db.VarChar
+  reveal_date                        DateTime? @db.Timestamp(6)
+  created_at                         DateTime  @default(now()) @db.Timestamp(6)
+  updated_at                         DateTime  @default(now()) @db.Timestamp(6)
+  students_hints_junior_idTostudents students? @relation("hints_junior_idTostudents", fields: [junior_id], references: [id], onDelete: Cascade, map: "junior___fk")
+  students_hints_senior_idTostudents students? @relation("hints_senior_idTostudents", fields: [senior_id], references: [id], onDelete: Cascade, map: "senior___fk")
+}
+
+model students {
+  id                              Int       @id(map: "students_pk")
+  microsoft_id                    Int?
+  uni_mail                        String?   @db.VarChar
+  nickname                        String?   @db.VarChar
+  fullname                        String?   @db.VarChar
+  nationality                     String?   @db.VarChar
+  insta_url                       String?   @db.VarChar
+  profile_pic_name                String?   @db.VarChar
+  role                            String?   @db.VarChar
+  house                           String?   @db.VarChar
+  senior_id                       Int?
+  created_at                      DateTime  @default(now()) @db.Timestamp(6)
+  updated_at                      DateTime  @default(now()) @db.Timestamp(6)
+  chances                         chances[]
+  hints_hints_junior_idTostudents hints[]   @relation("hints_junior_idTostudents")
+  hints_hints_senior_idTostudents hints[]   @relation("hints_senior_idTostudents")
+
+  @@index([nickname], map: "nickname_idx")
+  @@index([id], map: "students_id_index")
+}

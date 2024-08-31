@@ -1,0 +1,8 @@
+FROM docker.io/node:20
+COPY . /workspace
+WORKDIR /workspace
+RUN npm i 
+
+FROM docker.io/node:20
+COPY --from=0 /workspace /app
+CMD ["node", "/app/index.js"]

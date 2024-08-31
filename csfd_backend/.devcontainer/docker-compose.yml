@@ -1,0 +1,25 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    command: sleep infinity
+    ports:
+      - 3000:3000
+  db:
+    image: postgres:11
+    restart: always
+    environment:
+      - POSTGRES_USER=csfd_admin
+      - POSTGRES_PASSWORD=thereisnospoon
+    ports:
+      - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      - ADMINER_DEFAULT_SERVER=csfd_backend_devcontainer-db-1
+    ports:
+      - 8080:8080

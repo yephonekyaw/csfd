@@ -1,0 +1,204 @@
+@import url('https://fonts.cdnfonts.com/css/04b30');
+@import url('https://fonts.cdnfonts.com/css/onesize');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+}
+
+html * {
+    cursor: url(/static/default_cursor.png), pointer;
+}
+
+/* 
+    z-index list
+    side-nav-bar = 100
+    headroom-nav-bar = 90
+    hint-name-tag = 80
+    housepage-house-detail-mascot-image = 80
+    homepage-character-selection-mascot-image = 80
+    signin-background-cs-first-date-logo = 70
+*/
+
+/* styling for scroll activated navigation bar */
+.headroom {
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+    background: transparent;
+}
+
+.headroom--unfixed {
+    position: relative;
+    transform: translateY(0);
+    background: transparent;
+}
+
+.headroom--scrolled {
+    transition: transform 200ms ease-in-out;
+}
+
+.headroom--unpinned {
+    position: fixed;
+    transform: translateY(-100%);
+    background: #67CFF5;
+}
+
+.headroom--pinned {
+    position: fixed;
+    transform: translateY(0%);
+    background: #67CFF5;
+}
+
+/* Responsive background images for house detail page template */
+#alpha-base-template {
+    background-image: url(/static/house/alpha/bg_mb.png), linear-gradient(to bottom, #67CFF5, #0275E0);
+}
+
+#epsilon-base-template {
+    background-image: url(/static/house/epsilon/bg_mb.png), linear-gradient(to bottom, #FC96B2, #FFB982);
+}
+
+#eta-base-template {
+    background-image: url(/static/house/eta/bg_mb.png), linear-gradient(to bottom, #FFB882, #89AEF4);
+}
+
+#iota-base-template {
+    background-image: url(/static/house/iota/bg_mb.png), linear-gradient(to bottom, #43DA94, #E6B3FB);
+}
+
+@media (min-width: 768px) {
+    #alpha-base-template {
+        background-image: url(/static/house/alpha/bg_tb.png), linear-gradient(to bottom, #67CFF5, #0275E0);
+    }
+
+    #epsilon-base-template {
+        background-image: url(/static/house/epsilon/bg_tb.png), linear-gradient(to bottom, #FC96B2, #FFB982);
+    }
+
+    #eta-base-template {
+        background-image: url(/static/house/eta/bg_tb.png), linear-gradient(to bottom, #FFB882, #89AEF4);
+    }
+
+    #iota-base-template {
+        background-image: url(/static/house/iota/bg_tb.png), linear-gradient(to bottom, #43DA94, #E6B3FB);
+    }
+}
+
+@media (min-width: 1024px) {
+    #alpha-base-template {
+        background-image: url(/static/house/alpha/bg_desk.png), linear-gradient(to bottom, #67CFF5, #0275E0);
+    }
+
+    #epsilon-base-template {
+        background-image: url(/static/house/epsilon/bg_desk.png), linear-gradient(to bottom, #FC96B2, #FFB982);
+    }
+
+    #eta-base-template {
+        background-image: url(/static/house/eta/bg_desk.png), linear-gradient(to bottom, #FFB882, #89AEF4);
+    }
+
+    #iota-base-template {
+        background-image: url(/static/house/iota/bg_desk.png), linear-gradient(to bottom, #43DA94, #E6B3FB);
+    }
+}
+
+/* To Animate Popup Modal */
+dialog {
+    display: none;
+    animation: vanish 400ms;
+}
+
+dialog[open] {
+    display: block;
+    animation: appear 400ms;
+}
+
+dialog::backdrop {
+    display: none;
+    animation: backdrop-vanish 400ms;
+}
+
+dialog[open]::backdrop {
+    display: block;
+    animation: backdrop-appear 400ms;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(-10vh);
+        display: none;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        display: block;
+    }
+}
+
+@keyframes vanish {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+        display: block;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(10vh);
+        display: none;
+    }
+}
+
+@keyframes backdrop-appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+@keyframes backdrop-vanish {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* background imavge for hints and guess pages */
+.hint-guess-bg {
+    background-image: url(/static/hint_guess/bg_mb.png), linear-gradient(to bottom, #67d2f5, #33fff3);
+}
+
+@media (min-width: 768px) {
+    .hint-guess-bg {
+        background-image: url(/static/hint_guess/bg_tb.png), linear-gradient(to bottom, #67d2f5, #33fff3);
+    }
+}
+
+@media (min-width: 1024px) {
+    .hint-guess-bg {
+        background-image: url(/static/hint_guess/bg_desk.png), linear-gradient(to bottom, #67d2f5, #33fff3);
+    }
+}
+
+/* Carousel Title */
+@media (orientation: landscape) and (height < 500px) {
+    #carousel-title {
+        display: none;
+    }
+}
